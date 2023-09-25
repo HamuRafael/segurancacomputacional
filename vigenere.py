@@ -26,15 +26,19 @@ def main():
 
     #ENTRA NA FUNCAO DE DESCRIPTOGRAFAR
     elif opcao == 2:
-        chave = str(input('Digite a chave: ')).upper()
-        cifra = str(input('Digite a mensagem para ser descriptografada: ')).upper()
-        
+        chave = str(input('Digite a chave: ')).lower()
+        cifra = str(input('Digite a cifra para ser descriptografada: ')).lower()
+        for i in cifra:
+            if i not in alfabeto:
+                lista.append(i)
+                cifra = cifra.replace(i,"")
+        descriptografar(cifra,chave)
 
 
 def criptografar(mensagem,chave):
     mensagem_criptografada = ''
     keyFinal = ""
-    textofinal = ''
+    
     i = 0
     if len(mensagem) < len(chave):
         print('A mensagem é menor que a chave.')
@@ -48,26 +52,38 @@ def criptografar(mensagem,chave):
     for i in range(len(mensagem)):
         if mensagem[i] != ' ':
             posicao_letra = int(alfabeto.index(mensagem[i]))
-            print(keyFinal)
             posicao_letra_chave = int(alfabeto.index(keyFinal[i]))
-            textofinal += str(alfabeto[(posicao_letra+posicao_letra_chave) %26])
+            mensagem_criptografada += str(alfabeto[(posicao_letra+posicao_letra_chave) %26])
         else:
-            textofinal += ' '
+            mensagem_criptografada += ' '
         
-
-    print(textofinal)
-
-
-
-    
     print(mensagem_criptografada)
 
     
 
     
 def descriptografar(cifra,chave):
-    pass
-
+    mensagem_criptografada = ''
+    keyFinal = ""
+    i = 0
+    if len(cifra) < len(chave):
+        print('A mensagem é menor que a chave.')
+        return
+    while(len(keyFinal) < len(cifra)):
+        keyFinal += chave[i]
+        i+=1
+        if i == len(chave):
+            i = 0
+            
+    for i in range(len(cifra)):
+        if cifra[i] != ' ':
+            posicao_letra = int(alfabeto.index(cifra[i]))
+            posicao_letra_chave = int(alfabeto.index(keyFinal[i]))
+            mensagem_criptografada += str(alfabeto[(posicao_letra-posicao_letra_chave) %26])
+    
+        else:
+            mensagem_criptografada += ' '
+    print(mensagem_criptografada)
 if __name__ == '__main__':
     main()
 
