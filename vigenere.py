@@ -1,9 +1,10 @@
 import string
 import re
 lista = []
-alfabeto = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' + ' '
+alfabeto = 'abcdefghijklmnopqrstuvwxyz '
 letras_index = dict(zip(alfabeto,range(len(alfabeto))))
 index_letras = dict(zip(range(len(alfabeto)),alfabeto))
+
 def main():
 
     opcao = int(input('Digite 1 para Criptografrar, 2 para Descriptografar: '))
@@ -12,50 +13,61 @@ def main():
         print('Digite 1 ou 2.')
         #ENTRA NA FUNCAO DE CRIPTOGRAFIA
     elif opcao == 1:
-        chave = ''.join(str(input('Digite a chave: '))).upper() 
-        mensagem = (str(input('Digite a mensagem para ser criptografada: '))).upper()
-        # RETIRA SIMBOLOS E NUMEROS DA MENSAGEM 
+        chave = ''.join(str(input('Digite a chave: '))).lower()
+        mensagem = (str(input('Digite a mensagem para ser criptografada: '))).lower()        # RETIRA SIMBOLOS E NUMEROS DA MENSAGEM 
         for i in mensagem:
             if i not in alfabeto:
                 lista.append(i)
                 mensagem = mensagem.replace(i,"")
-        print(f'Os caracteres {lista} foram removidos.')
+        
+        if len(lista) != 0:
+            print(f'Os caracteres {lista} foram removidos.')
         criptografar(mensagem,chave)
 
     #ENTRA NA FUNCAO DE DESCRIPTOGRAFAR
     elif opcao == 2:
         chave = str(input('Digite a chave: ')).upper()
         cifra = str(input('Digite a mensagem para ser descriptografada: ')).upper()
-        descriptografar(cifra,chave)
-    
+        
+
+
 def criptografar(mensagem,chave):
     mensagem_criptografada = ''
-    j = 0
+    keyFinal = ""
+    textofinal = ''
+    i = 0
+    if len(mensagem) < len(chave):
+        print('A mensagem é menor que a chave.')
+        return
+    while(len(keyFinal) < len(mensagem)):
+        keyFinal += chave[i]
+        i+=1
+        if i == len(chave):
+            i = 0
+            
     for i in range(len(mensagem)):
-        if ord(mensagem[i]) == 32:
-            mensagem_criptografada += " "
+        if mensagem[i] != ' ':
+            posicao_letra = int(alfabeto.index(mensagem[i]))
+            print(keyFinal)
+            posicao_letra_chave = int(alfabeto.index(keyFinal[i]))
+            textofinal += str(alfabeto[(posicao_letra+posicao_letra_chave) %26])
         else:
-            if j < len(chave):
-                mensagem_criptografada += chave[j]
-                j += 1
-            else:
-                j = 0
-                mensagem_criptografada += chave[j]
-                j += 1
+            textofinal += ' '
+        
+
+    print(textofinal)
+
+
+
+    
     print(mensagem_criptografada)
 
-    #algoritmo que vi na internet, que da um split na mensagem no tamanho da chave
-   # split_message = [mensagem[i:i + len(chave)] for i in range(0, len(''.join(mensagem)), len(chave))]
+    
 
-    #for each_split in split_message:
-     #   i = 0
-      #  for letra in each_split:
-       #    numero = (letras_index[letra] + letras_index[chave[i]]) % len(alfabeto)
-        #   mensagem_criptografada += index_letras[numero]
-         #  i+=1
-    print(mensagem_criptografada)
+    
 def descriptografar(cifra,chave):
     pass
 
 if __name__ == '__main__':
     main()
+
