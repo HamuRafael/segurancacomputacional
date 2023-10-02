@@ -7,7 +7,7 @@ Alunos:
 
 Rafael Hamú 
 
-Sussanah Gurgel
+Susannah Gurgel
 ## Run
 Para rodar o Trabalho:
 
