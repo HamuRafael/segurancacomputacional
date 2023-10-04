@@ -1,19 +1,13 @@
 import string
 lista = []
-alfabeto = 'abcdefghijklmnopqrstuvwxyz '
+alfabeto = 'abcdefghijklmnopqrstuvwxyz'
 
 def main():
 
     opcao = int(input('Digite 1 para Criptografrar, 2 para Descriptografar: '))
     chave = ''.join(str(input('Digite a chave: '))).lower()
     texto = (str(input('Digite a mensagem para ser criptografada: '))).lower()        # RETIRA SIMBOLOS E NUMEROS DA MENSAGEM 
-    for i in texto:
-        if i not in alfabeto:
-            lista.append(i)
-            texto = texto.replace(i,"")
-        
-        if len(lista) != 0:
-            print(f'Os caracteres {lista} foram removidos.')
+    
     
     if opcao != 1 and opcao != 2:
         print('Digite 1 ou 2.')
@@ -39,12 +33,12 @@ def criptografar(texto,chave):
             i = 0
             
     for i in range(len(texto)):
-        if texto[i] != ' ':
+        if texto[i] in alfabeto:
             posicao_letra = int(alfabeto.index(texto[i]))
             posicao_letra_chave = int(alfabeto.index(keyFinal[i]))
             mensagem_criptografada += str(alfabeto[(posicao_letra+posicao_letra_chave) %26])
         else:
-            mensagem_criptografada += ' '
+            mensagem_criptografada += texto[i]
         
     print(mensagem_criptografada)
     
@@ -62,14 +56,14 @@ def descriptografar(texto,chave):
             i = 0
             
     for i in range(len(texto)):
-        if texto[i] != ' ':
+        if texto[i] in alfabeto:
             
             posicao_letra = int(alfabeto.index(texto[i]))
             posicao_letra_chave = int(alfabeto.index(keyFinal[i]))
             mensagem_criptografada += str(alfabeto[(posicao_letra-posicao_letra_chave) %26])
     
         else:
-            mensagem_criptografada += ' '
+            mensagem_criptografada += texto[i]
     print(mensagem_criptografada)
 if __name__ == '__main__':
     main()
