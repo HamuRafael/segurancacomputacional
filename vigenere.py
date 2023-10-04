@@ -1,22 +1,29 @@
 import string
 lista = []
 alfabeto = 'abcdefghijklmnopqrstuvwxyz'
-
+x = 0
 def main():
+    global x
+    while x==0 :
 
-    opcao = int(input('Digite 1 para Criptografrar, 2 para Descriptografar: '))
-    chave = ''.join(str(input('Digite a chave: '))).lower()
-    texto = (str(input('Digite a mensagem para ser criptografada: '))).lower()        # RETIRA SIMBOLOS E NUMEROS DA MENSAGEM 
+        opcao = int(input('Digite 1 para Criptografrar, 2 para Descriptografar ou 3 para sair: '))
+        if opcao == 3:
+            break
+        elif opcao != 1 and opcao != 2:
+            print('Digite 1,2 ou 3')
+            
+            #ENTRA NA FUNCAO DE CRIPTOGRAFIA
+        chave = ''.join(str(input('Digite a chave: '))).lower()
+        texto = (str(input('Digite a mensagem para ser criptografada: '))).lower()        # RETIRA SIMBOLOS E NUMEROS DA MENSAGEM 
     
-    
-    if opcao != 1 and opcao != 2:
-        print('Digite 1 ou 2.')
-        #ENTRA NA FUNCAO DE CRIPTOGRAFIA
-    elif opcao == 1:
-        criptografar(texto,chave)
-    #ENTRA NA FUNCAO DE DESCRIPTOGRAFAR
-    elif opcao == 2:
-        descriptografar(texto,chave)
+
+        if opcao == 1:
+            criptografar(texto,chave)
+        #ENTRA NA FUNCAO DE DESCRIPTOGRAFAR
+        elif opcao == 2:
+            descriptografar(texto,chave)
+        elif opcao == 3:
+            x+=1
 
 def criptografar(texto,chave):
     mensagem_criptografada = ''
