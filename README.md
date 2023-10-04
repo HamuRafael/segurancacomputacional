@@ -13,7 +13,7 @@ Para rodar o Trabalho:
 
 Executar:
 
-python3 vigenere.py
+python3 main.py
 
 ## Funcionalidades
 
